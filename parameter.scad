@@ -2,7 +2,6 @@
 sh=3; //Spielfeld höhe (this is a pre scal value! so in den end you will get sh*s!)
 a=10; //Spielfeld winkel am rand
 wood_d=19; //Holz dicke
-echo(s_over);
 s=0.8; //Scalling of the table! Tested for 0.8 (80%)!
 ablage=138; 
 kastenh=300*s;
@@ -14,6 +13,7 @@ beh=50; //Balleinwurf höhe (will not be scalled by s)
 g_l=180*s; //Griff länge
 t_b=205*s; //Tor breite
 t_h=80*s;  //Tor höhe
+c_l=260; //Länge der point counters
 //Ball is assumed to be 32 mm
 
 //Mutter M3

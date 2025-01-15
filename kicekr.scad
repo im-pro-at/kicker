@@ -33,7 +33,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         for(i=[0:7])
         translate([-3.5*ass+ass*i,wood_d+1,sh*s+afs+asf])
         rotate([90,0,0])
-            cylinder(d=25,h=wood_d+2);
+            cylinder(d=25 ,h=wood_d+2);
         
         //balleinwurf
         translate([0,wood_d+1,beh])
@@ -49,8 +49,8 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
     {
         wood([wood_d,680*s,kastenh-wood_d]);
         
-        translate([-1,680*s/2-205*s/2-3,3+kastenh/2])
-            cube([wood_d+2,205*s+6,80*s+3]);
+        translate([-1,680*s/2-t_b/2-3,sh*s+kastenh/2-3])
+            cube([wood_d+2,t_b+6,t_h+3+3]);
     }
 
     //ablage
@@ -210,9 +210,9 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         }
     }
 
-    color("white")
+    *color("white")
     translate([0,0,32/2+3])
-    sphere(d=32, $fn=20);
+        sphere(d=32, $fn=20);
 
     //Tor
     for(m=[0,1])
@@ -234,6 +234,13 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
     mirror([0,m,0])
     translate([0,680*s/2,beh])
         load("einwurf");
+        
+   //counter
+    for(m=[0,1])
+    color(m?"blue":"red")
+    mirror([m,0,0])
+    translate([1200*s/2+ablage/2,0,kastenh/2])
+        load("counter");
 }
 
 FIGUR=1;

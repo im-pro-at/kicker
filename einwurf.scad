@@ -1,10 +1,22 @@
 include <parameter.scad>
 
-einwurf();
 
-module einwurf()
+einwurf(1);
+
+// hilfe
+%difference()
+{
+    translate([-40/2,wood_d+3-2,0])
+        cube([40,3,40]);
+
+    einwurf(0);
+}
+
+
+module einwurf(cut=0)
 difference()
 {
+    dz=-3+0.8405;
     union()
     {
         // Aussen
@@ -36,12 +48,12 @@ difference()
         }
         
         // Innen
-        translate([0,0,0])
+        translate([0,0,dz])
         rotate([90,0,0])
             cylinder(d=45+15,h=3);
 
         for(z=[40/2+7.5,-40/2-7.5])
-        translate([0,0,z])
+        translate([0,0,dz+z])
         rotate([90,0,0])
             cylinder(d=15,h=3);
 
@@ -76,8 +88,8 @@ difference()
         cube([40,80,40]);
 
     // Innen    
-    for(z=[40/2+7.5,-45/2-7.5])
-    translate([0,0,z])
+    for(z=[40/2+7.5,-40/2-7.5])
+    translate([0,0,dz+z])
     {
         translate([0,1,0])
         rotate([90,0,0])
@@ -87,6 +99,11 @@ difference()
         rotate([-90,0,0])
             cylinder(h=3,d1=7.5,d2=3);
     }
+    
+    // cut
+    if(cut)
+    translate([-60/2,wood_d+3,-60/2])
+        cube([60,2,60]);
 
 }
 

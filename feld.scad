@@ -1,9 +1,19 @@
 include <parameter.scad>
 
-color("white")
+
+intersection()
+{
     feld(0);
-color("green")
+    
+    translate([1200*s/2-200,-250/2,0])
+        cube([250,250,250]);
+}
+
+*color("white")
+    feld(0);
+*color("green")
     feld(1);
+    
 
 //Spielfeld
 module feld(fol)
@@ -22,13 +32,23 @@ scale([s,s,s])
     }
     else
     {
-        intersection()
+        union()
         {
-            feld_h();
+            intersection()
+            {
+                feld_h();
 
-            translate([0,0,-1])
-            linear_extrude(40)
-                feld_l(1);
+                translate([0,0,-1])
+                linear_extrude(40)
+                    feld_l(1);
+            }
+            
+            // Tor
+            for(m=[0,1])
+            mirror([m,0,0])
+            translate([1200/2-1,-t_b/s/2-3/2,0])
+                cube([wood_d/s+1,t_b/s+3,sh]);
+            
         }
     }
     
