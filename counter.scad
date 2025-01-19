@@ -1,36 +1,53 @@
 include <parameter.scad>
 
-
-c_b=c_l/(2+10+1); //2 endcap 10 number 1 spacers
-
 stange();
-*stange(1);
 
 for(m=[0,1])
 mirror([0,m,0])
-translate([0,c_b*6,0])
+translate([0,c_b*6+5+0.001,0])
     endcap();
 
 for(i=[1:10])
-translate([0,i*(c_b+play)-c_b*5.5,0])
+translate([0,-i*(c_b+1)+5*(c_b+1),0])
     number(i);
 
 module stange(cut=0)
 difference()
 {   
-    l=cut?(c_b+2):(c_b*13-10);
-    b=cut?(c_b+play*2):c_b;
+    l=cut?(c_b+2):(c_b*13);
+    echo(l);
+    b=cut?(c_b+play*2):(c_b-play);
     union()
     {
         translate([0,0,c_b/2])
         rotate([0,45,0])
             cube([b/2,l,b/2],center=true);
+        
+        if(cut==0)
+        for(i=[0:4])
+        for(d=[-1,1])
+        translate([0,d*(0.5+b/2+i*(b+1)),0])
+        translate([0,0,c_b/2])
+        rotate([0,45,0])
+        for(r=[0,180])
+        rotate([0,r,0])        
+        union()
+        {
+            rb=c_b/2+2*play;
+            *translate([-rb/2+1/2,0,rb/2-1/2])
+            rotate([0,90,0])
+                cylinder(d=1,h=rb/2+1-1/2);
+
+            translate([-rb/2+1/2,0,-rb/2+1/2])
+                cylinder(d=1,h=rb-1);
+            
+        }
     }
 
     if(cut==0)
     for(m=[0,1])
     mirror([0,m,0])
-    translate([0,c_b*6,-1])
+    translate([0,c_b*6+5,-1])
         cylinder(d=4+play,h=c_b+2);
 }
 

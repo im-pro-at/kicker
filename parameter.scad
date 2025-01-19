@@ -13,7 +13,8 @@ beh=50; //Balleinwurf höhe (will not be scalled by s)
 g_l=180*s; //Griff länge
 t_b=205*s; //Tor breite
 t_h=80*s;  //Tor höhe
-c_l=260; //Länge der point counters
+c_l=300; //Länge der point counters
+c_b=(c_l-10)/(2+10+1); //2 endcap 10 number 1 spacers 
 //Ball is assumed to be 32 mm
 
 //Mutter M3
