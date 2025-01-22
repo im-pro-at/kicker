@@ -15,6 +15,7 @@ t_b=205*s; //Tor breite
 t_h=80*s;  //Tor höhe
 c_l=300; //Länge der point counters
 c_b=(c_l-10)/(2+10+1); //2 endcap 10 number 1 spacers 
+bw= 100; //Bein dicke
 //Ball is assumed to be 32 mm
 
 //Mutter M3

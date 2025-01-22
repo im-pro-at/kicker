@@ -20,12 +20,13 @@ rotate([0,0,$t*360]) //for animation
 translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
 {
     //Spielfeld platte
+    color("LightBlue")
     translate([-1200*s/2,-680*s/2,-wood_d])
         wood([1200*s,680*s,wood_d]);
 
     //Seiten platten
     for(d=[-1,1])
-    translate([0,-wood_d/2+d*(680*s/2+wood_d/2),0])
+    translate([0,-wood_d/2+d*(680*s/2+wood_d/2)*1.2,0])
     difference()
     {
         translate([-1200*s/2-ablage,0,-kastenh/2])
@@ -45,8 +46,9 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
     }
 
     //tor platten
+    color("LightSalmon")
     for(d=[-1,1])
-    translate([-wood_d/2+d*(1200*s/2 +wood_d/2),-680*s/2,-kastenh/2])
+    translate([-wood_d/2+d*(1200*s/2 +wood_d/2)*1.1,-680*s/2,-kastenh/2])
     difference()
     {
         wood([wood_d,680*s,kastenh-wood_d]);
@@ -56,13 +58,15 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
     }
 
     //ablage
+    color("LightGoldenrodYellow")
     for(d=[-1,1])
-    translate([-ablage/2+d*(ablage/2+1200*s/2),-680*s/2,kastenh/2-wood_d])
+    translate([-ablage/2+d*(ablage/2+1200*s/2)*1.15,-680*s/2,kastenh/2-wood_d+40])
         wood([ablage,680*s,wood_d]);
 
     //ball ausgabe
+    color("LightSlateGray")
     for(d=[-1,1])
-    translate([-wood_d/2+d*(-wood_d/2+1200*s/2+ablage),-680*s/2,-kastenh/2])
+    translate([-wood_d/2+d*(-wood_d/2+1200*s/2+ablage)*1.2,-680*s/2,-kastenh/2])
     difference()
     {
         wood([wood_d,680*s,kastenh-wood_d]);
@@ -70,18 +74,23 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         translate([-1,-300*s/2+680*s/2,wood_d])
             cube([wood_d+2,300*s,100*s]);
     }
+    
+    color("MediumAquamarine")
     for(dx=[-1,1])
-    for(dy=[-1,1])
-    translate([-(ablage-2*wood_d)/2+dx*((ablage-2*wood_d)/2+1200*s/2+wood_d),-wood_d/2+dy*(300*s/2+wood_d/2),-kastenh/2])
+    for(dy=[-1.1,1.1])
+    translate([-(ablage-2*wood_d)/2+dx*((ablage-2*wood_d)/2+1200*s/2+wood_d)*1.15,-wood_d/2+dy*(300*s/2+wood_d/2),-kastenh/2])
         wood([ablage-2*wood_d,wood_d,kastenh-wood_d]);
 
-    for(d=[-1,1])
-    translate([-(ablage-2*wood_d)/2+d*((ablage-2*wood_d)/2+1200*s/2+wood_d),-300*s/2,-kastenh/2])
+    for(d=[-1,1]) 
+    color("RosyBrown")
+    translate([-(ablage-2*wood_d)/2+d*((ablage-2*wood_d)/2+1200*s/2+wood_d)*1.15,-300*s/2,-kastenh/2])
         wood([ablage-2*wood_d,300*s,wood_d]);
 
     //Beine
     azb= abs-sh*s-afs-asf;  //Abstand Zerro zu boden
     xl=28.3; //Extralänge für schräge
+    color("OrangeRed")
+    translate([0,0,0])
     difference()
     {
         union()
@@ -89,34 +98,41 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
             for(dx=[-1,1])
             {
                 for(dy=[-1,1])
-                translate([dx*(1200*s/2-bw),-wood_d/2+dy*(3*wood_d/2+680*s/2),0])
+                translate([dx*(1200*s/2-bw),-wood_d/2+dy*(3*wood_d/2+680*s/2)*1.4,0])
                 mirror([(dx+1)/2,0,0])
                 rotate([0,15,0])
                 translate([0,0,-azb-xl])
                 {
                     wood([bw,wood_d,azb+xl*2]);
-                    translate([0,-dy*wood_d,0])
+                    translate([0,-dy*(wood_d+20),0])
                         wood([bw,wood_d,azb-kastenh/2+xl*2]);
                 }
 
-                translate([-wood_d/4+dx*(1200*s/2-bw/2),-680*s/2-wood_d,-azb/2])
-                    wood([wood_d,680*s+2*wood_d,bw/2]);
+                translate([-wood_d/4+dx*(1200*s/2-bw/2),-680*s/2-
+wood_d,-azb/2])
+                    wood([wood_d,680*s+2*wood_d+1,bw/2]);
+
             }
         }
+
+            for(dx=[-1,1])
+                translate([-wood_d/4+dx*(1200*s/2-bw/2)+0.1,-680*s/2-
+wood_d-100+0.1,-azb/2+0.12])
+                    wood([wood_d,680*s+2*wood_d+1+200,bw/2+2]);
         
         //cut floor
         translate([0,0,-100/2-azb])
-            cube([1200*s+2*ablage,680*s+4*wood_d+1,100],center=true);
+            cube([1200*s+2*ablage,680*s*1.6+4*wood_d+1,100],center=true);
         //cut top
         translate([0,0,100/2])
-            cube([1200*s+2*ablage,680*s+4*wood_d+1,100],center=true);
+            cube([1200*s+2*ablage,680*s*1.6+4*wood_d+1,100+1],center=true);
     }
     
     //spilfeld:
-    color("green")
+    *color("green")
         load("feld_1");
 
-    color("white")
+    *color("white")
         load("feld_0");    
 
     //Stangen
@@ -168,8 +184,8 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         [6, s2p,  0],
         [7, stor, 0]
     ];
-
-    for(temp=sdata)
+    
+    *for(temp=sdata)
     {
         i= temp[0];
         data= temp[1];
@@ -211,40 +227,40 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         }
     }
 
-    color("white")
+    *color("white")
     translate([0,0,32/2+3])
         sphere(d=32, $fn=20);
 
     //Tor
-    for(m=[0,1])
+    *for(m=[0,1])
     color(m?"red":"blue")
     mirror([m,0,0])
     translate([1200*s/2,0,3])
         load("tor");
 
     //Ballausgabe 300/100
-    for(m=[0,1])
+    *for(m=[0,1])
     color(m?"red":"blue")
     mirror([m,0,0])
     translate([1200*s/2+ablage,0,-kastenh/2+wood_d])
         load("ausgabe");
 
     //Balleinwurf aussen
-    for(m=[0,1])
+    *for(m=[0,1])
     color(m?"red":"blue")
     mirror([0,m,0])
     translate([0,680*s/2,beh])
         load("einwurf");
         
     //counter
-    for(m=[0,1])
+    *for(m=[0,1])
     color(m?"red":"blue")
     mirror([m,0,0])
     translate([1200*s/2+ablage/2,0,kastenh/2])
         load("counter");
 
     //Bein mount
-    for(my=[0,1])
+    *for(my=[0,1])
     for(mx=[0,1])
     color(my?"blue":"red")
     mirror([0,my,0])
@@ -252,7 +268,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
     translate([-wood_d/4+1200*s/2-bw/2+wood_d/2-mx*wood_d/2,-680*s/2,-azb/2+bw/4])
         load("beinmount");
     
-    for(m=[0,1])
+    *for(m=[0,1])
     color(m?"red":"blue")
     mirror([m,0,0])
     translate([1200*s/2,0,0])
@@ -266,6 +282,11 @@ STOPPER=4;
 ENDCAP=5;
 module renderfigure(modules, dir)
 {
+    echo(g_l-6-7.5);
+    translate([0,(modules == GRIFF)?g_l-6-7.5:0,0])
+    rotate([90,0,0])
+        cylinder(h=1,d=50);
+
     //Figure
     if (modules == FIGUR && dir == 0)
     color(dir?"red":"blue")
