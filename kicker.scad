@@ -61,7 +61,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         wood([ablage,680*s,wood_d]);
 
     //ball ausgabe
-    for(d=[-1,1])
+    *for(d=[-1,1])
     translate([-wood_d/2+d*(-wood_d/2+1200*s/2+ablage),-680*s/2,-kastenh/2])
     difference()
     {
@@ -82,7 +82,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
     //Beine
     azb= abs-sh*s-afs-asf;  //Abstand Zerro zu boden
     xl=28.3; //Extralänge für schräge
-    difference()
+    *difference()
     {
         union()
         {
@@ -169,7 +169,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         [7, stor, 0]
     ];
 
-    for(temp=sdata)
+    *for(temp=sdata)
     {
         i= temp[0];
         data= temp[1];
@@ -182,7 +182,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         a=(i<($t*8)&&(i+1)>=($t*8))?($t*800%100/100):0;
         d=a<0.25?a*2:(a<0.5?1-a*2:(a<0.75?1-a*2:a*2-2));
         dy=d*( 680*s + data[1][1]*2-20);
-        
+
         translate([-3.5*ass+ass*i,0,sh*s+afs+asf])
         {
             color(dir?"red":"blue")
@@ -223,7 +223,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         load("tor");
 
     //Ballausgabe 300/100
-    for(m=[0,1])
+    *for(m=[0,1])
     color(m?"red":"blue")
     mirror([m,0,0])
     translate([1200*s/2+ablage,0,-kastenh/2+wood_d])
@@ -244,7 +244,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         load("counter");
 
     //Bein mount
-    for(my=[0,1])
+    *for(my=[0,1])
     for(mx=[0,1])
     color(my?"blue":"red")
     mirror([0,my,0])
@@ -253,7 +253,7 @@ translate([($t<0.5?$t:1-$t)*-000,0,0]) //for animation
         load("beinmount");
     
     for(m=[0,1])
-    color(m?"red":"blue")
+    //color(m?"black":"blue")
     mirror([m,0,0])
     translate([1200*s/2,0,0])
         load("ballfaenger");

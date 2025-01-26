@@ -1,7 +1,7 @@
-$fn=100;
-play=0.2;
+include <parameter.scad>
+use <lager.scad>
+use <einwurf.scad>
 
-wood_d=19; //18.6 also kein play nötig
 b_l=65; // Bohere länge!
 
 translate([0,0,0])
@@ -16,6 +16,17 @@ translate([400,0,0])
     helper5();
 translate([500,0,0])
     helper6();
+translate([600,0,0])
+rotate([-90,0,0])
+    helper7();
+translate([700,0,0])
+rotate([-90,0,0])
+    helper8();
+translate([800,0,0])
+    helper9();
+translate([900,0,0])
+rotate([0,-90,0])
+    helper10();
 
 module helper1()
 difference()
@@ -194,4 +205,66 @@ difference()
         cube([5,3,30]);
         
 }
+
+module helper7()
+difference()
+{
+    translate([-30/2,3-2,0])
+        cube([30,3,kastenh/2-(sh*s+afs+asf)]);
+
+    lager(1);
+}
+
+module helper8()
+difference()
+{
+    translate([-40/2,wood_d+3-2,0])
+        cube([40,3,40]);
+
+    einwurf(0);
+}
+
+module helper9()
+difference()
+{
+    union()
+    {
+        translate([-30,-20/2,-29/2])
+            cube([2*30,20,29]);
+    }
+    
+    // Stangen Loch
+    translate([0,20/2+1,0])
+    rotate([90,0,0])
+        cylinder(d=16+play,h=20+2);
+    
+    // Schraube
+    translate([30+1,0,0])
+    rotate([0,-90,0])
+        cylinder(d=3, h=2*30+2);
+        
+    translate([-15/2,-2/2,-29/2-1])
+        cube([15,2,29+2]);
+}    
+
+module helper10()
+difference()
+{
+    union()
+    {
+        translate([-29/2,-15/2,-29/2])
+            cube([29/2+30,15,29]);
+    }
+    
+    // Stangen Loch
+    translate([0,(37*s+2)/2,0])
+    rotate([90,0,0])
+        cylinder(d=16+play,h=37*s+2);
+    
+    translate([0,-(15+2)/2,-2/2])
+        cube([30+1,15+2,2]);
+}    
+
+
+
 

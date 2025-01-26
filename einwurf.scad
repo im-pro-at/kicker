@@ -3,16 +3,6 @@ include <parameter.scad>
 
 einwurf(1);
 
-// hilfe
-%difference()
-{
-    translate([-40/2,wood_d+3-2,0])
-        cube([40,3,40]);
-
-    einwurf(0);
-}
-
-
 module einwurf(cut=0)
 difference()
 {
